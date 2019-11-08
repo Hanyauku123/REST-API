@@ -14,6 +14,47 @@ const insert =(req, res)=>{
     })
 }
 
+const update = (req, res) => {
+    let student = req.body
+    if(!student._id){
+        return res.status(400).json({
+            message: 'El campo id es obligatorio'
+        })
+    }
+    Register.update({_id: student._id}, student)
+    .then(value =>{
+        res.status(200).json({
+            msg: 'Operacion de modificar exitosa'
+        })
+    })
+    .catch((err) => {
+        res.status(500).json({
+            msg: 'Algo salio mal en la operacion modificar'
+        })
+    })
+}
+
+const deleteById = (req, res) => {
+    let student = req.body
+    if (!student._id) {
+        return res.status(400).json({
+            msg: 'El campo id es obligatorio'
+        })
+    }
+    Register.deleteOne({_id: student._id})
+    .then(value =>{
+        res.status(200).json({
+            msg: 'Operacion de modificar exitosa'
+        })
+    })
+    .catch((err) => {
+        res.status(500).json({
+            msg: 'Algo salio mal en la operacion modificar'
+        })
+    })
+    
+}
+
 const getRegister = (req, res)=>{
     Register.find({}, (error, documents)=>{
         if(error)
@@ -40,4 +81,4 @@ const getOneRegister = (req, res)=>{
     });
 };
 
-module.exports = { getRegister, insert, getOneRegister };
+module.exports = { getRegister, insert, update, deleteById, getOneRegister };
