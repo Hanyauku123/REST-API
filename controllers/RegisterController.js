@@ -81,4 +81,4 @@ const getOneRegister = (req, res)=>{
     });
 };
 
-module.exports = { getRegister, insert, update, deleteById, getOneRegister };
+module.exports = { getRegister, insert, update, deleteById, getOneRegister  };
